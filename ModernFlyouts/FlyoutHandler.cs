@@ -218,6 +218,18 @@ namespace ModernFlyouts
 
         private void Instance_DisplayUpdated(object sender, EventArgs e)
         {
+            if (DisplayManager.Instance.DisplayMonitors.Any(x => x.DeviceId == AppDataHelper.PreferredDisplayMonitorId))
+            {
+                if (onScreenFlyoutPreferredMonitor.DeviceId != AppDataHelper.PreferredDisplayMonitorId)
+                {
+                    _savePreferredMonitor = false;
+                    OnScreenFlyoutPreferredMonitor = DisplayManager.Instance.GetDisplayMonitorFromDeviceId(AppDataHelper.PreferredDisplayMonitorId);
+                    AlignFlyout();
+                    _savePreferredMonitor = true;
+                    return;
+                }
+            }
+
             if (!DisplayManager.Instance.DisplayMonitors.Any(x => x == onScreenFlyoutPreferredMonitor))
             {
                 _savePreferredMonitor = false;

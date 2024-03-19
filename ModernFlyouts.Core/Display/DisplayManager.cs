@@ -89,6 +89,11 @@ namespace ModernFlyouts.Core.Display
             return GetDisplayMonitorFromHMonitor(hMonitor);
         }
 
+        public DisplayMonitor GetDisplayMonitorFromDeviceId(string deviceId)
+        {
+            return GetDisplayMonitorByDeviceId(deviceId);
+        }
+
         private void RefreshDisplayMonitorList()
         {
             multiMonitorSupport = GetSystemMetrics(SM_CMONITORS) != 0;
@@ -168,6 +173,11 @@ namespace ModernFlyouts.Core.Display
         private DisplayMonitor GetDisplayMonitorByDeviceName(string deviceName)
         {
             return DisplayMonitors.FirstOrDefault(x => x.DeviceName == deviceName);
+        }
+
+        private DisplayMonitor GetDisplayMonitorByDeviceId(string deviceId)
+        {
+            return DisplayMonitors.FirstOrDefault(x => x.DeviceId == deviceId);
         }
 
         private DisplayMonitor CreateDisplayMonitorFromMonitorInfo(string deviceName)
